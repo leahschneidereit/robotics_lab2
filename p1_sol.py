@@ -1,37 +1,18 @@
+import rbm
 import math
 import numpy as np
 
-def rot_roll(psi):
-	'''
-        This function returns a matrix for a roll rotation (about the x-axis)
-	'''
+if __name__ == "__main__":
+	theta = math.pi / 2
+	phi = math.pi/2
+	psi = math.pi/2
 	
-	rot = np.array([[1.0, 0.0, 0.0], [0.0, math.cos(psi), -math.sin(psi)],[0.0, math.sin(psi), math.cos(psi)]])
-	
-	return rot
-	
-def rot_pitch(theta):
-	'''
-        This function returns a matrix for a pitch rotation (about the y axis)
-	'''
-	
-	rot = np.array([[math.cos(theta), 0.0, math.sin(theta)],[0.0,1.0,0.0],[-math.sin(theta), 0.0, math.cos(theta)]])
-	
-	return rot
+	np.set_printoptions(precision = 2, suppress = True)
+	Rx = p1_sol.rot_roll(psi)
+	Ry = p1_sol.rot_pitch(theta)
+	Rz = p1_sol.rot_yaw(phi)
+	R1 = np.matmul(Rx, Ry)
+	R = np.matmul(R1, Rz)
 
-def rot_yaw(phi):
-	'''
-        This function returns a matrix for a yaw rotation (about the z-axis)
-	'''
-	
-	rot = np.array([[math.cos(phi), -math.cos(phi), 0.0], [math.sin(phi), math.cos(phi), 0.0],[0.0, 0.0, 1.0]])
-	
-	return rot
-
-def vec(x, y, z):
-        '''
-        This function initializes the vector orientation as an array of its
-        x, y, and z positioning
-        '''
-	vec = np.array([[x,y,z]]).T
-	return vec
+	print("The results of the Roll-Pitch-Yaw rotation for the given angles is: ", R)
+    
